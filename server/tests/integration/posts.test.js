@@ -255,4 +255,4 @@ describe('DELETE /api/posts/:id', () => {
 
     expect(res.status).toBe(401);
   });
-}); 
+});

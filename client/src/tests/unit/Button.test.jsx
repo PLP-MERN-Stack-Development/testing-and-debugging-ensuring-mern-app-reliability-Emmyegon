@@ -92,4 +92,35 @@ describe('Button Component', () => {
     // Should also have the default classes
     expect(button).toHaveClass('btn-primary');
   });
-}); 
+  
+  // Additional tests from update
+  it('should render button with text', () => {
+    render(<Button>Click me</Button>);
+    const button = screen.getByRole('button', { name: /click me/i });
+    expect(button).toBeInTheDocument();
+  });
+
+  it('should call onClick handler when clicked', () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    const button = screen.getByRole('button', { name: /click me/i });
+
+    fireEvent.click(button);
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should be disabled when disabled prop is true', () => {
+    render(<Button disabled>Click me</Button>);
+    const button = screen.getByRole('button', { name: /click me/i });
+
+    expect(button).toBeDisabled();
+  });
+
+  it('should apply custom className', () => {
+    render(<Button className="custom-class">Click me</Button>);
+    const button = screen.getByRole('button', { name: /click me/i });
+
+    expect(button).toHaveClass('custom-class');
+  });
+});
